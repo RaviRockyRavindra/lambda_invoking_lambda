@@ -1,0 +1,23 @@
+@Author : Ravindra sai konna
+
+# Lambda1 which besides to the Api Gateway
+# Handler called la
+# Boto3 sdk which helps to access the resources in aws
+# Attach the iam policy which contains the cloudwatch , lambdainvoke , lambda Async
+# 
+
+import boto3, json
+
+def la(event, context):
+
+    lambdainvoke = boto3.client("lambda", region_name="ap-south-1")
+    payload = {"message": "Hi, my dear lambda catch my payload."}
+
+   
+    response = lamdainvoke.invoke(
+        
+        FunctionName = "<new lambda name here>", InvocationType = "RequestResponse", Payload = json.dumps(payload)
+        
+        )
+        
+    return response["Payload"].read()
