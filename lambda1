@@ -5,19 +5,25 @@
 # Boto3 sdk which helps to access the resources in aws
 # Attach the iam policy which contains the cloudwatch , lambdainvoke , lambda Async
 # 
-
 import boto3, json
 
-def la(event, context):
+def lambda_handler(event, context):
+	
+	lambdainvoke = boto3.client("lambda", region_name="ap-south-1")
+	
+	transactionId = event['queryStringParameters']['transactionId']
+	transactionType = event['queryStringParameters']['type']
+	transactionAmount = event['queryStringParameters']['amount']
 
-    lambdainvoke = boto3.client("lambda", region_name="ap-south-1")
-    payload = {"message": "Hi, my dear lambda catch my payload."}
+	#2. Construct the body of the response object
+	transactionResponse = {}
+	transactionResponse['transactionId'] = transactionId
+	transactionResponse['type'] = transactionType
+	transactionResponse['amount'] = transactionAmount
+	transactionResponse['message'] = 'Lambda1 passing events to lambda2'
+	
+	response = lambdainvoke.invoke(FunctionName = "lambdanode", InvocationType = "RequestResponse", Payload = json.dumps(transactionResponse))
+    
 
-   
-    response = lamdainvoke.invoke(
-        
-        FunctionName = "<new lambda name here>", InvocationType = "RequestResponse", Payload = json.dumps(payload)
-        
-        )
-        
-    return response["Payload"].read()
+	return response["Payload"].read()
+
