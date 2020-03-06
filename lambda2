@@ -4,6 +4,7 @@ import json
 
 def lambda_handler(event, context):
   
+    event['secondmessage']= 'Hitted events to Lambda2'
     return { 'statusCode': 200,
         'body': json.dumps(event)
         
