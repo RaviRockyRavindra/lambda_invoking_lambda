@@ -14,3 +14,8 @@ lambda --> Serverless compute service that runs your code in response to events 
 
 AWS Lambda functions execute in a container (sandbox) that isolates them from other functions and provides the resources, such as memory, specified in the function's configuration
 
+# Outcome
+ Assume my gateway 
+ https://206o3wjpk8.execute-api.ap-south-1.amazonaws.com/default/lambdaRouter?transactionId=5000&type=secure&amount=250000
+ 
+ just replace the params for transactionid=? & type= ? & amount=?  
